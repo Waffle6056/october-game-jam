@@ -5,7 +5,7 @@ var y = 0
 var currentmap
 var jumping = false
 
-const SPEED = 300.0
+const SPEED = 300.0 ## not adjusted
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -45,16 +45,24 @@ func _ready():
 func collcheck():
 	for index in get_slide_collision_count():
 		var coll = get_slide_collision(index)
-		var cell = tilemaps[y].local_to_map(coll.get_position()/2)	
+		## the position is divided by 2 because the tilemaps in main are scaled up by 2
+		var cell = tilemaps[y].local_to_map(coll.get_position()/2)
 		var tile_id = tilemaps[y].get_cell_atlas_coords(y,cell)
-		
+		## tile_id (4,0) is the fall tile
 		if (tile_id.x == 4 and not jumping):
 			set_collision_mask_value(y+1, false)
 			y -= 1
 			if (y <= -1):
+				
+				## TODO needs death function
+				
 				print("fell off map")
 			else:
 				set_collision_mask_value(y+1, true)
+				
+				## TODO needs to not be terrible
+				
+				## just teleports the player to bypass the wall collision
 				position -= coll.get_normal()*18
 				print(y)
 				
@@ -63,4 +71,3 @@ func collcheck():
 		
 func _process(delta):
 	collcheck()
- # Replace with function body.
