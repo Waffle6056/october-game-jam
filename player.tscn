@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://bku43wmijyr4q"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_v8kgu"]
+[ext_resource type="Texture2D" uid="uid://dbujbp726bts5" path="res://resources/wiz.png" id="2_ahths"]
+
+[sub_resource type="Animation" id="Animation_endpj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_m3i0d"]
+resource_name = "walking"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.262015, 0.0, -0.261964, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ixhxr"]
+_data = {
+"RESET": SubResource("Animation_endpj"),
+"walking": SubResource("Animation_m3i0d")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0gr1u"]
+radius = 4.47213
+
+[node name="player" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 0
+motion_mode = 1
+platform_floor_layers = 4294967167
+script = ExtResource("1_v8kgu")
+
+[node name="Wiz" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(18, 28)
+texture = ExtResource("2_ahths")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Wiz"]
+libraries = {
+"": SubResource("AnimationLibrary_ixhxr")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(21, 50)
+rotation = 1.57146
+shape = SubResource("CircleShape2D_0gr1u")
