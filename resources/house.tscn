@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx2mkov57v32h"]
+
+[ext_resource type="Texture2D" uid="uid://ck8lhu6lsk5g7" path="res://resources/closedhouse.png" id="1_le8u5"]
+[ext_resource type="Script" path="res://resources/house.gd" id="1_tpl0s"]
+[ext_resource type="Texture2D" uid="uid://8e4vl0yx40vn" path="res://resources/openhouse.png" id="2_h6y4m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvewm"]
+size = Vector2(67, 157)
+
+[node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 64
+collision_mask = 64
+mass = 0.01
+gravity_scale = 0.0
+max_contacts_reported = 16
+contact_monitor = true
+script = ExtResource("1_tpl0s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.5, -76.5)
+shape = SubResource("RectangleShape2D_kvewm")
+
+[node name="Closedhouse" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-7, -95)
+scale = Vector2(2, 2)
+texture = ExtResource("1_le8u5")
+
+[node name="Openhouse" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(-7, -92)
+scale = Vector2(2, 2)
+texture = ExtResource("2_h6y4m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

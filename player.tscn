@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bku43wmijyr4q"]
+[gd_scene load_steps=16 format=3 uid="uid://bku43wmijyr4q"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_v8kgu"]
 [ext_resource type="Texture2D" uid="uid://dbujbp726bts5" path="res://resources/wiz.png" id="2_ahths"]
+[ext_resource type="Texture2D" uid="uid://c61y7iwauvmdk" path="res://resources/lhand.png" id="3_1xrty"]
+[ext_resource type="Script" path="res://punch.gd" id="3_8da4m"]
+[ext_resource type="Texture2D" uid="uid://d4b8uwrol5kjb" path="res://resources/rhand.png" id="4_afoyt"]
 
 [sub_resource type="Animation" id="Animation_endpj"]
 length = 0.001
@@ -28,6 +31,22 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-3, -22)]
+}
+
+[sub_resource type="Animation" id="Animation_kl6kj"]
+resource_name = "drop"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-3, -22), Vector2(-3, 420)]
 }
 
 [sub_resource type="Animation" id="Animation_jv1km"]
@@ -64,22 +83,6 @@ tracks/0/keys = {
 "values": [0.0, 0.262015, 0.0, -0.261964, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_kl6kj"]
-resource_name = "drop"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-3, -22), Vector2(-3, 420)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ixhxr"]
 _data = {
 "RESET": SubResource("Animation_endpj"),
@@ -91,9 +94,99 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_0gr1u"]
 radius = 4.47213
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_182b2"]
+radius = 16.0
+
+[sub_resource type="Animation" id="Animation_03m7f"]
+resource_name = "punch"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(55, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lhand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(55, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Rhand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(55, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_i2tjm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rhand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lhand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s20vb"]
+_data = {
+"RESET": SubResource("Animation_i2tjm"),
+"punch": SubResource("Animation_03m7f")
+}
+
 [node name="player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 0
+collision_mask = 129
 motion_mode = 1
 platform_floor_layers = 4294967167
 script = ExtResource("1_v8kgu")
@@ -128,6 +221,36 @@ wait_time = 0.1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(0, -19)
+collision_layer = 0
+collision_mask = 64
+sync_to_physics = false
+script = ExtResource("3_8da4m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+visible = false
+shape = SubResource("CircleShape2D_182b2")
+
+[node name="Lhand" type="Sprite2D" parent="AnimatableBody2D"]
+visible = false
+scale = Vector2(2, 2)
+texture = ExtResource("3_1xrty")
+
+[node name="Rhand" type="Sprite2D" parent="AnimatableBody2D"]
+visible = false
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("4_afoyt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatableBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_s20vb")
+}
+
 [connection signal="timeout" from="JumpTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="jank" to="." method="_on_jank_timeout"]
+[connection signal="animation_finished" from="AnimatableBody2D/AnimationPlayer" to="AnimatableBody2D" method="_on_animation_player_animation_finished"]
