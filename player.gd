@@ -29,6 +29,7 @@ func hover(time):
 	airborne = true
 	airtime += time
 	set_collision_mask_value(y+1, false)
+	
 
 func jump(offset):
 	if (jumping):
@@ -44,12 +45,12 @@ func jump(offset):
 	$JumpTimer.start()
 	$Wiz/AnimationPlayer.play("jump")
 
-func dash(distance, time):
+func dash(distance, time, dir):
 	dashing = true
 	dashes -= 1
 	hover(0.2)
 	$DashTimer.start(time)
-	dashcalc = get_local_mouse_position().normalized() * distance
+	dashcalc = dir * distance
 	
 func inputs():
 	if (Input.is_action_pressed("Up")):
@@ -70,7 +71,7 @@ func inputs():
 		dashes = 1
 		jumps = 1
 	if (Input.is_action_just_pressed("Dash") and not dashing and dashes > 0):
-		dash(dashdis,0)
+		dash(dashdis,0,get_local_mouse_position().normalized())
 	if (dashing):
 		velocity += dashcalc
 	
@@ -82,6 +83,11 @@ func _physics_process(delta):
 		return
 	jumptime -= delta
 	airtime -= delta
+	if (airborne and not jumping):
+		if ((tilemaps[y].get_cell_atlas_coords(y,tilemaps[y].local_to_map(position)/2)).x != 4):
+			set_collision_mask_value(y+1, true)
+		else:
+			set_collision_mask_value(y+1, false)
 	if (airtime <= 0):
 		airborne = false
 		set_collision_mask_value(y+1, true)
@@ -92,12 +98,12 @@ func _physics_process(delta):
 	
 	
 func _ready():
-	tilemaps[0] = get_parent().get_node("TileMap1")
-	tilemaps[1] = get_parent().get_node("TileMap2")
-	tilemaps[2] = get_parent().get_node("TileMap3")
-	tilemaps[3] = get_parent().get_node("TileMap4")
-	tilemaps[4] = get_parent().get_node("TileMap5")
-	tilemaps[5] = get_parent().get_node("TileMap6")
+	tilemaps[0] = get_parent().get_node("Level/TileMap1")
+	tilemaps[1] = get_parent().get_node("Level/TileMap2")
+	tilemaps[2] = get_parent().get_node("Level/TileMap3")
+	tilemaps[3] = get_parent().get_node("Level/TileMap4")
+	tilemaps[4] = get_parent().get_node("Level/TileMap5")
+	tilemaps[5] = get_parent().get_node("Level/TileMap6")
 		
 func collcheck():
 	for index in get_slide_collision_count():
@@ -110,7 +116,6 @@ func collcheck():
 		var tile_id = tilemaps[y].get_cell_atlas_coords(y,cell)
 		## tile_id (4,0) is the fall tile
 		if (tile_id.x == 4):
-			print(airtime)
 			if (airtime < -0.5):
 				hover(0.15)
 				pass
@@ -126,10 +131,10 @@ func collcheck():
 				print("fell off map")
 			else:
 				set_collision_mask_value(y+1, true)
+				hover(0.05)
 				jank = coll.get_position() - coll.get_normal() + Vector2(0,23)
 				$jank.start()
 				jankbool = true
-			print(y)
 		elif (tile_id.x == 0 and jankbool and not jumping):
 			position = jank
 		

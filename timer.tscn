@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7mdw3faayvso"]
+
+[ext_resource type="Script" path="res://Timer.gd" id="1_pe8ro"]
+[ext_resource type="Texture2D" uid="uid://cje8p848db1jt" path="res://resources/numbers/zero.png" id="2_t5k1p"]
+[ext_resource type="Texture2D" uid="uid://dfnjphrl00ro5" path="res://resources/numbers/colon.png" id="3_3byy1"]
+
+[node name="Timer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_pe8ro")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Zero" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(20, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t5k1p")
+centered = false
+
+[node name="Zero2" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(42, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t5k1p")
+centered = false
+
+[node name="Zero3" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(76, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t5k1p")
+centered = false
+
+[node name="Zero4" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(98, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t5k1p")
+centered = false
+
+[node name="Zero5" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(132, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t5k1p")
+centered = false
+
+[node name="Zero6" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(154, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t5k1p")
+centered = false
+
+[node name="Zero7" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(176, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t5k1p")
+centered = false
+
+[node name="Colon" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(70, 40)
+scale = Vector2(2, 2)
+texture = ExtResource("3_3byy1")
+
+[node name="Colon2" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(126, 40)
+scale = Vector2(2, 2)
+texture = ExtResource("3_3byy1")

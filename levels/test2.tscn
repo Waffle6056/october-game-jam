@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn3osmc1b4hk8"]
+
+[ext_resource type="Script" path="res://levels/level.gd" id="1_7ou4p"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_7ou4p")
+playerpos = Vector2(200, 500)
+numhouses = 12

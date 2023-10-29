@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b13s7mly8hpsq"]
+
+[ext_resource type="Script" path="res://dashpickup.gd" id="1_odn3t"]
+[ext_resource type="Texture2D" uid="uid://bsab3ap1k61rc" path="res://resources/candy/purplepickup.png" id="2_vbfbk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ctiug"]
+radius = 40.3113
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" groups=["PickUp"]]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_odn3t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_ctiug")
+
+[node name="Purplepickup" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -1)
+scale = Vector2(3, 3)
+texture = ExtResource("2_vbfbk")

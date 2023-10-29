@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdjm1tnfhdjmg"]
+
+[ext_resource type="Script" path="res://menubutton.gd" id="1_1ngov"]
+[ext_resource type="Texture2D" uid="uid://bqlvkqgp0431p" path="res://resources/numbers/nine.png" id="2_t08w8"]
+[ext_resource type="Texture2D" uid="uid://dfnjphrl00ro5" path="res://resources/numbers/colon.png" id="3_do6p8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_odese"]
+bg_color = Color(0.0431373, 0, 0.129412, 1)
+
+[node name="Menu" type="Control"]
+z_index = 5
+y_sort_enabled = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_odese")
+
+[node name="Button" type="Button" parent="Panel"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 196.0
+offset_bottom = 93.0
+text = "testlevel"
+script = ExtResource("1_1ngov")
+path = "res://levels/testlevel.tscn"
+platinum = 3.5
+gold = 4.0
+silver = 5.0
+copper = 7.0
+
+[node name="One" type="Sprite2D" parent="Panel/Button"]
+position = Vector2(10, 92)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t08w8")
+
+[node name="One2" type="Sprite2D" parent="Panel/Button"]
+position = Vector2(32, 92)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t08w8")
+
+[node name="One3" type="Sprite2D" parent="Panel/Button"]
+position = Vector2(66, 92)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t08w8")
+
+[node name="One4" type="Sprite2D" parent="Panel/Button"]
+position = Vector2(88, 92)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t08w8")
+
+[node name="One5" type="Sprite2D" parent="Panel/Button"]
+position = Vector2(122, 92)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t08w8")
+
+[node name="One6" type="Sprite2D" parent="Panel/Button"]
+position = Vector2(144, 92)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t08w8")
+
+[node name="One7" type="Sprite2D" parent="Panel/Button"]
+position = Vector2(166, 92)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t08w8")
+
+[node name="Colon" type="Sprite2D" parent="Panel/Button"]
+position = Vector2(50, 92)
+scale = Vector2(2, 2)
+texture = ExtResource("3_do6p8")
+
+[node name="Colon2" type="Sprite2D" parent="Panel/Button"]
+position = Vector2(106, 92)
+scale = Vector2(2, 2)
+texture = ExtResource("3_do6p8")
+
+[connection signal="pressed" from="Panel/Button" to="Panel/Button" method="_on_pressed"]

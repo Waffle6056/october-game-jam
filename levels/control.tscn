@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://ylrw8pydaykq"]
+
+[ext_resource type="Script" path="res://levels/end_screen.gd" id="1_fbuyk"]
+
+[node name="Control" type="Control"]
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fbuyk")
+
+[node name="menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = -302.0
+offset_top = -202.0
+offset_right = 301.0
+offset_bottom = -52.0
+shortcut_feedback = false
+text = "MENU"
+
+[node name="restart" type="Button" parent="."]
+layout_mode = 0
+offset_left = -301.0
+offset_top = -42.0
+offset_right = 302.0
+offset_bottom = 108.0
+shortcut_feedback = false
+text = "RESTART"
+
+[node name="next" type="Button" parent="."]
+layout_mode = 0
+offset_left = -300.0
+offset_top = 116.0
+offset_right = 303.0
+offset_bottom = 266.0
+shortcut_feedback = false
+text = "NEXT LEVEL
+"
+
+[connection signal="pressed" from="menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="next" to="." method="_on_next_pressed"]

@@ -15,4 +15,5 @@ func asfd():
 func _on_body_entered(_body):
 	$Closedhouse.visible = false
 	$Openhouse.visible = true
+	get_parent().numhouses -= 1
 	call_deferred("asfd")
